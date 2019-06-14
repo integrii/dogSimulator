@@ -14,9 +14,11 @@ func main() {
 
 	// make a new dog
 	dog := NewDog("Fred")
+	fmt.Println("You go to the pet store and come home with a dog named", dog.Name)
 
 	// begin simulating dog
 	for {
+		time.Sleep(time.Second) // slow simulation down to one action per second
 
 		// let the dog die when its too old
 		dog.Age++
@@ -40,7 +42,7 @@ func main() {
 
 		// pick a random thing to do and do it
 		choiceNumber := rand.Intn(5) // 5 being the number of things the dog can possibly do
-		switch choiceNumber {
+		switch choiceNumber+1 {
 		case 1:
 			dog.Bark()
 		case 2:
@@ -52,12 +54,12 @@ func main() {
 		case 5:
 			dog.Play()
 		}
-		time.Sleep(time.Second) // slow simulation down to one action per second
 	}
 
 	fmt.Println(dog.Name,"has lived a good life but is now dead.")
 }
 
+// Dog represents a four legged friend
 type Dog struct {
 	Name string
 	Hunger int
