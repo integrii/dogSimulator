@@ -21,7 +21,7 @@ func main() {
 		time.Sleep(time.Second) // slow simulation down to one action per second
 
 		// let the dog die when its too old
-		dog.Age++
+		dog.Birthday()
 		if dog.Age > 20 {
 			break
 		}
@@ -74,6 +74,11 @@ func NewDog(name string) *Dog {
 		Hunger: 0,
 		Tiredness: 0,
 	}
+}
+
+// Birthday makes the dog get older
+func (d *Dog) Birthday() {
+	d.Age++
 }
 
 // Sleep makes the dog take a rest. resets tiredness to 0
