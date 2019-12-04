@@ -6,15 +6,15 @@ import (
 	"time"
 )
 
-func init(){
+func init() {
 	rand.Seed(time.Now().Unix()) // initialize global pseudo random generator
 }
 
 func main() {
 
 	// make a new dog
-	dog := NewDog("Fred")
-	fmt.Println("You go to the pet store and come home with a dog named", dog.Name)
+	dog := NewDog("Ace")
+	fmt.Println("Bruce Wayne goes to the pet store and comes home with a dog named", dog.Name)
 
 	// begin simulating dog
 	for {
@@ -22,27 +22,27 @@ func main() {
 
 		// let the dog die when its too old
 		dog.Birthday()
-		if dog.Age > 20 {
+		if dog.Age > 22 {
 			break
 		}
 
 		// if 100 hungry, the dog has to eat
 		if dog.Hunger >= 100 {
-			fmt.Println(dog.Name,"is incredibly hungry and stops to eat.")
+			fmt.Println(dog.Name, "is incredibly hungry and stops to eat.")
 			dog.Eat()
 			continue
 		}
 
 		// if 100 tired, the dog has to sleep
 		if dog.Tiredness >= 100 {
-			fmt.Println(dog.Name,"is incredibly tired and stops to sleep.")
+			fmt.Println(dog.Name, "is incredibly tired and stops to sleep.")
 			dog.Sleep()
 			continue
 		}
 
 		// pick a random thing to do and do it
-		choiceNumber := rand.Intn(5) // 5 being the number of things the dog can possibly do
-		switch choiceNumber+1 {
+		choiceNumber := rand.Intn(7) // 7 being the number of things the dog can possibly do
+		switch choiceNumber + 1 {
 		case 1:
 			dog.Bark()
 		case 2:
@@ -53,25 +53,29 @@ func main() {
 			dog.Sleep()
 		case 5:
 			dog.Play()
+		case 6:
+			dog.ChaseBird()
+		case 7:
+			dog.StopsCrime()
 		}
 	}
 
-	fmt.Println(dog.Name,"has lived a good life but is now dead.")
+	fmt.Println(dog.Name, ", what a life, he came, he saw, he conquered, now he is dead and Bruce is sad.")
 }
 
 // Dog represents a four legged friend
 type Dog struct {
-	Name string
-	Hunger int
+	Name      string
+	Hunger    int
 	Tiredness int
-	Age int
+	Age       int
 }
 
 // NewDog creates a new dog and returns a pointer to it
 func NewDog(name string) *Dog {
-	return &Dog {
-		Name: name,
-		Hunger: 0,
+	return &Dog{
+		Name:      name,
+		Hunger:    0,
 		Tiredness: 0,
 	}
 }
@@ -109,4 +113,17 @@ func (d *Dog) Play() {
 func (d *Dog) Run() {
 	fmt.Println(d.Name, "runs around")
 	d.Tiredness = d.Tiredness + 40
+}
+
+//ChaseBird makes the dog chase a bird
+func (d *Dog) ChaseBird() {
+	fmt.Println(d.Name, "chases a bird")
+	d.Tiredness = d.Tiredness + 50
+
+}
+
+//StopsCrime makes Ace stop a crime
+func (d *Dog) StopsCrime() {
+	fmt.Println(d.Name, "stops a crime")
+	d.Hunger = d.Hunger + 50
 }
